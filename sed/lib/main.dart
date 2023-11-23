@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home/login.dart'; // Importe a sua nova página
+import 'login/login.dart'; // Importe a sua nova página
 
 void main() {
   runApp(MyApp());
