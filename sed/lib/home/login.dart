@@ -8,7 +8,7 @@ import './components/titulo_SED.dart';
 
 
 
-class home_escola extends StatelessWidget {
+class login_escola extends StatelessWidget {
     String email="";
     String senha="";
 
@@ -70,7 +70,7 @@ class home_escola extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 60),
+            SizedBox(height: 30),
             // Container para o campo de senha com sombra
             Container(
               height:80,
@@ -120,7 +120,7 @@ class home_escola extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: 60, vertical: 30),
               ),
             ),
           ],

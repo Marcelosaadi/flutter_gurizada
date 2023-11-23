@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './home/home.dart'; // Importe a sua nova página
+import 'home/login.dart'; // Importe a sua nova página
 
 void main() {
   runApp(MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: home_escola(), // Use sua nova página aqui
+      home: login_escola(), // Use sua nova página aqui
     );
   }
 }
