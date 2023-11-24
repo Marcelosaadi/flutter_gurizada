@@ -9,6 +9,7 @@ class InputCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Adicione aqui o seu header centralizado
