@@ -62,7 +62,7 @@ class login_escola extends StatelessWidget {
                   },
                 decoration: InputDecoration(
                   hintText: 'Email',
-                  contentPadding: EdgeInsets.symmetric(vertical: 40,horizontal: 150),
+                  contentPadding: EdgeInsets.symmetric(vertical: 40,horizontal: 40),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
@@ -93,7 +93,7 @@ class login_escola extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Senha',
-                  contentPadding: EdgeInsets.symmetric(vertical: 40,horizontal: 150),
+                  contentPadding: EdgeInsets.symmetric(vertical: 40,horizontal: 40),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
