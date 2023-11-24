@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sed/confirmar_codigo/confirmar_codigo.dart';
 import '/home/components/sedName.dart';
 import './components/infos_entrega.dart';
 
 class ConfirmarEntrega extends StatelessWidget {
+  final String quantidade;
+  final String item;
+  const ConfirmarEntrega({required this.quantidade,required this.item  ,Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +25,8 @@ class ConfirmarEntrega extends StatelessWidget {
             child: PedidoCard(
               status: 'Em andamento',
               previsaoEntrega: '29 de fevereiro de 2024',
-              conteudo: 'Mobiliário em Geral',
-              quantidade: 5,
+              conteudo: item,
+              quantidade: quantidade,
             ),
           ),
 
@@ -46,7 +50,12 @@ class ConfirmarEntrega extends StatelessWidget {
               widthFactor: 0.8,
               child: ElevatedButton(
                 onPressed: () {
-                  // Lógica para confirmação
+                  Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ConfirmarCodigo(),
+            ),
+          );
                 },
                 child: Text('Confirmação'),
               ),
@@ -68,7 +77,7 @@ class ConfirmarEntrega extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("08070"), // Seu número de 5 dígitos aqui
+              Text("12345"), // Seu número de 5 dígitos aqui
               SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {

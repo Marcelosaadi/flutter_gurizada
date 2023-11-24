@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:sed/confirmar_entrega/confirmar_entrega.dart';
 import '../../listagem/listagem.dart';
 
-Padding fornecedorCard(String fornecedoor, String quantidade, String total, BuildContext context, String item) {
+Padding cardCie(String fornecedoor, String quantidade, String total, BuildContext context, String item) {
   double progress = int.parse(quantidade) / int.parse(total);
   Color progressBarColor = progress >= 1 ? Colors.green : Colors.red;
   
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-    child: GestureDetector(
+     child: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => listagem(name: fornecedoor),
+              builder: (context) => ConfirmarEntrega(quantidade: total, item: item),
             ),
           );
         },

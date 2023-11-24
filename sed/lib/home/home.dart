@@ -144,6 +144,7 @@ class Home extends StatelessWidget {
                       card.diretoria, 
                       card.quantidadeEntrgue, 
                       card.quantidadeTotal,
+                      context
                       
                       )
                     ],

@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:sed/entrega_escola/entrega_escola.dart';
 
-Padding escolaCard(String nome, String quantidade, String total) {
+Padding escolaCard(String nome, String quantidade, String total,BuildContext context) {
   double progress = int.parse(quantidade) / int.parse(total);
   Color progressBarColor = progress >= 1 ? Colors.green : Colors.red;
   
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+    child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => entregaEscola(name: nome),
+            ),
+          );
+        },
     child: Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -57,5 +67,5 @@ Padding escolaCard(String nome, String quantidade, String total) {
         ),
       ),
     ),
-  );
+  ));
 }

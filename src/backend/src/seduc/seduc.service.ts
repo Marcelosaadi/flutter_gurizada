@@ -148,33 +148,9 @@ export class SeducService {
     return combinedQuantities;
   }
 
-  async findEntregasFornecedorCie(fornecedor: string){
-    return await this.prisma.tabelacertinho.groupBy({
-      by: ['item', 'cie'],
-      _sum: {
-        quantidade: true,
-      },
-      where: {
-        fornecedor: fornecedor,
-      },
-    });
-  }
-
-  async findEntregasFornecedorCieTrue(fornecedor: string){
-    return await this.prisma.tabelacertinho.groupBy({
-      by: ['item', 'cie'],
-      _sum: {
-        quantidade: true,
-      },
-      where: {
-        fornecedor: fornecedor,
-        entregue: true,
-      },
-    });
-  }
-
-  async findEscolaDiretoria(diretoria: string){
-    return await this.prisma.tabelacertinho.groupBy({
+  async findEscolaDiretoria(diretoria: string) {
+    // Soma total de itens
+    const totalQuantities = await this.prisma.tabelacertinho.groupBy({
       by: ['item', 'cie'],
       _sum: {
         quantidade: true,
@@ -183,21 +159,35 @@ export class SeducService {
         diretoria: diretoria,
       },
     });
-  }
-
-  async findEscolaDiretoriaTrue(diretoria: string){
-    return await this.prisma.tabelacertinho.groupBy({
+  
+    // Soma total de itens entregues
+    const deliveredQuantities = await this.prisma.tabelacertinho.groupBy({
       by: ['item', 'cie'],
       _sum: {
         quantidade: true,
       },
       where: {
-        diretoria: diretoria,
         entregue: true,
+        diretoria: diretoria,
       },
     });
+  
+    // Combinar os dois resultados
+    const combinedQuantities = totalQuantities.map(total => {
+      const delivered = deliveredQuantities.find(delivered => 
+        delivered.item === total.item && delivered.cie === total.cie
+      );
+  
+      return {
+        item: total.item,
+        cie: total.cie,
+        quantidade_total: total._sum.quantidade.toString() || '0',
+        quantidade_entregue: delivered ? delivered._sum.quantidade.toString() : '0',
+      };
+    });
+  
+    return combinedQuantities;
   }
-
 
 
   remove(id: number) {

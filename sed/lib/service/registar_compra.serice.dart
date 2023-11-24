@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:http/http.dart' as http;
 
 void main () {
   // createCompra("item", "diretoria", 1, "fornecedor", "cie", 1);
   // getCardFornecedor();
-  getCardFornecedorName('Weblabor São Paulo Materiais Didáticos');
+  // getCardFornecedorName('Weblabor São Paulo Materiais Didáticos');
+  // getCardDiretoriaName('Centro Sul');
+  // confirmarEntrega("13");
 
 }
 
@@ -76,7 +79,23 @@ Future<List<dynamic>> getCardFornecedorName(String name) async {
     var response = await http.get(Uri.parse("$baseUrl/fornecedor/escola/$name"));
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
-       print(jsonData);
+      //  print(jsonData);
+      return List<dynamic>.from(jsonData);
+    } else {
+      throw Exception(
+          "Failed to load posts. Status code: ${response.statusCode}");
+    }
+  } catch (e) {
+    throw Exception("Failed to load posts: $e");
+  }
+}
+
+Future<List<dynamic>> getCardDiretoriaName(String name) async {
+  try {
+    var response = await http.get(Uri.parse("$baseUrl/cie/diretoria/$name"));
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body);
+      //  print(jsonData);
       return List<dynamic>.from(jsonData);
     } else {
       throw Exception(
@@ -87,3 +106,7 @@ Future<List<dynamic>> getCardFornecedorName(String name) async {
   }
 }
   
+Future<void> confirmarEntrega(String id) async {
+ await http.patch(Uri.parse("$baseUrl/entrega/$id"));
+}
+

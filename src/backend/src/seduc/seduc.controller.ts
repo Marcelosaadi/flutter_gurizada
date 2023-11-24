@@ -46,10 +46,6 @@ export class SeducController {
     return this.seducService.findEscolaDiretoria(diretoria);
   }
 
-  @Get('/cie/diretoria/true/:diretoria')
-  findCieDiretoriaTrue(@Param('diretoria') diretoria: string) {
-    return this.seducService.findEscolaDiretoriaTrue(diretoria);
-  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

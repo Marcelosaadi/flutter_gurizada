@@ -4,7 +4,7 @@ class PedidoCard extends StatelessWidget {
   final String status;
   final String previsaoEntrega;
   final String conteudo;
-  final int quantidade;
+  final String quantidade;
 
   const PedidoCard({
     Key? key,
