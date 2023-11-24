@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Escolas extends StatelessWidget {
-  final String regiao;
-  final String nome;
-  final String endereco;
-  final String status;
-  final String previsao;
 
-  const Escolas({
-    Key? key,
-    required this.regiao,
-    required this.nome,
-    required this.endereco,
-    required this.status,
-    required this.previsao,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+ Container escolaCard(String nome, String regiao, String endereco, String status, String previsao, String quantidade_total, String item) {
     return Container(
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(8.0),
@@ -34,8 +18,9 @@ class Escolas extends StatelessWidget {
           Text(endereco),
           Text(status),
           Text(previsao),
+          Text('Quantidade para ser entregue: $quantidade_total $item')
         ],
       ),
     );
   }
-}
+

@@ -18,11 +18,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login',
+      initialRoute: '/home',
       routes: {
         '/login': (context) =>  login_escola(),
         '/home': (context) =>  const Home(),
-        '/listagem': (context) =>   listagem(),
+        // '/listagem': (context) =>   const listagem(),
         '/cadastarEntrega': (context) =>   CadastroEntregaScreen(),
         '/listagemEscolas': (context) =>   lista_escolas(),
       },

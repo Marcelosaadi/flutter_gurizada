@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import '../home/components/sedName.dart';
+import '../service/registar_compra.serice.dart';
 
 class CadastroEntregaScreen extends StatelessWidget {
   // Adicione uma variável para rastrear a seleção do item
+
   String? dropdownItemValue;
+  String? dropdownDiretoriaValue;
+  int? quantidade = 0;
+  String? dropdownFornecedorValue;
+  String cie = "";
+  int? entrega = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +100,7 @@ class CadastroEntregaScreen extends StatelessWidget {
                     value: dropdownItemValue,
                     onChanged: (String? newValue) {
                       // Atualize a seleção do item
-                      dropdownItemValue = newValue;
+                      dropdownDiretoriaValue = newValue;
                     },
                     items: const <String>[
                       'Norte 1',
@@ -118,6 +125,12 @@ class CadastroEntregaScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 23),
                   TextField(
+                    onChanged: (value) {
+                      int? novaQuantidade = int.tryParse(value);
+                      if (novaQuantidade != null){
+                          quantidade = novaQuantidade;
+                      }
+                    },
                     decoration: InputDecoration(
                       labelText: 'Quantidade',
                       contentPadding:
@@ -163,7 +176,7 @@ class CadastroEntregaScreen extends StatelessWidget {
                     value: dropdownItemValue,
                     onChanged: (String? newValue) {
                       // Atualize a seleção do item
-                      dropdownItemValue = newValue;
+                      dropdownFornecedorValue = newValue;
                     },
                     items: const <String>[
                       'XP On Consultoria LTDA',
@@ -180,6 +193,9 @@ class CadastroEntregaScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 23),
                   TextField(
+                    onChanged: (value) {
+                      cie = value;
+                    },
                     decoration: InputDecoration(
                       labelText: 'CIE da escola',
                       contentPadding:
@@ -204,6 +220,12 @@ class CadastroEntregaScreen extends StatelessWidget {
 
                   SizedBox(height: 23),
                   TextField(
+                    onChanged: (value) {
+                      int? novaQuantidade = int.tryParse(value);
+                      if (novaQuantidade != null){
+                          entrega = novaQuantidade;
+                      }
+                    },
                     decoration: InputDecoration(
                       labelText: 'Dias Até a Entrega',
                       contentPadding:
@@ -241,13 +263,22 @@ class CadastroEntregaScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed("/home");
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      createCompra(
+                          dropdownItemValue!,
+                          dropdownDiretoriaValue!,
+                          quantidade!,
+                          dropdownFornecedorValue!,
+                          cie,
+                          entrega!).then((data){
+                            Navigator.of(context).pushReplacementNamed("/home");
+                            ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Compra registrada com sucesso!'),
                                 duration: Duration(seconds: 3),
                               ),
                             );
+
+                          });
                     },
                     child: Text('Registrar Entrega',
                         style: TextStyle(fontSize: 16)),

@@ -25,55 +25,127 @@ export class SeducService {
     return `This action returns all seduc`;
   }
 
-  async findFornecedorItem() {
-    return  await this.prisma.tabelacertinho.groupBy({
-      by: ['fornecedor', 'item'],
+  async findItemQuantities() {
+    // Soma total de itens
+    const totalQuantities = await this.prisma.tabelacertinho.groupBy({
+      by: ['item', 'fornecedor'],
       _sum: {
         quantidade: true,
       },
     });
-
-  }
-
-  async findFornecedorItemTrue() {
-    return  await this.prisma.tabelacertinho.groupBy({
-      by: ['fornecedor', 'item'],
-      _sum: {
-        quantidade: true,
-      },
-      where: {
-        entregue: true, 
-      },
-    });
-  }
-
-  async findEscolaItem() {
-    return  await this.prisma.tabelacertinho.groupBy({
-      by: ['diretoria', 'item'],
-      _sum: {
-        quantidade: true,
-      },
-    });
-
-  }
-
-  async findEscolaItemTrue() {
-    return  await this.prisma.tabelacertinho.groupBy({
-      by: ['diretoria', 'item'],
+  
+    // Soma total de itens entregues
+    const deliveredQuantities = await this.prisma.tabelacertinho.groupBy({
+      by: ['item', 'fornecedor'],
       _sum: {
         quantidade: true,
       },
       where: {
-        entregue: true, 
+        entregue: true,
       },
     });
+  
+    // Combinar os dois resultados
+    const combinedQuantities = totalQuantities.map(total => {
+      const delivered = deliveredQuantities.find(delivered => 
+        delivered.item === total.item && delivered.fornecedor === total.fornecedor
+      );
+  
+      return {
+        item: total.item,
+        fornecedor: total.fornecedor,
+        quantidade_total: total._sum.quantidade.toString(),
+        quantidade_entregue: delivered ? delivered._sum.quantidade.toString() : '0',
+      };
+    });
+  
+    return combinedQuantities;
   }
+  
+  async findDiretoriaQuantities() {
+    // Soma total de itens por diretoria
+    const totalQuantities = await this.prisma.tabelacertinho.groupBy({
+      by: ['diretoria'],
+      _sum: {
+        quantidade: true,
+      },
+    });
+  
+    // Soma total de itens entregues por diretoria
+    const deliveredQuantities = await this.prisma.tabelacertinho.groupBy({
+      by: ['diretoria'],
+      _sum: {
+        quantidade: true,
+      },
+      where: {
+        entregue: true,
+      },
+    });
+  
+    // Combinar os dois resultados
+    const combinedQuantities = totalQuantities.map(total => {
+      const delivered = deliveredQuantities.find(delivered => 
+        delivered.diretoria === total.diretoria
+      );
+  
+      return {
+        diretoria: total.diretoria,
+        quantidade_total: total._sum.quantidade.toString() || '0',
+        quantidade_entregue: delivered ? delivered._sum.quantidade.toString() || '0' : '0',
+      };
+    });
+  
+    return combinedQuantities;
+  }
+  
+
 
   async updateEntrega(id: number) {
     return await this.prisma.tabelacertinho.update({
       where: {id: id},
       data: {entregue: true}
     });
+  }
+
+  async findItemFornecedorByName(fornecedor: string) {
+    // Soma total de itens
+    const totalQuantities = await this.prisma.tabelacertinho.groupBy({
+      by: ['item', 'cie'],
+      _sum: {
+        quantidade: true,
+      },
+      where: {
+        fornecedor: fornecedor,
+      },
+    });
+  
+    // Soma total de itens entregues
+    const deliveredQuantities = await this.prisma.tabelacertinho.groupBy({
+      by: ['item', 'cie'],
+      _sum: {
+        quantidade: true,
+      },
+      where: {
+        entregue: true,
+        fornecedor: fornecedor,
+      },
+    });
+  
+    // Combinar os dois resultados
+    const combinedQuantities = totalQuantities.map(total => {
+      const delivered = deliveredQuantities.find(delivered => 
+        delivered.item === total.item && delivered.cie === total.cie
+      );
+  
+      return {
+        item: total.item,
+        cie: total.cie,
+        quantidade_total: total._sum.quantidade.toString(),
+        quantidade_entregue: delivered ? delivered._sum.quantidade.toString() : '0',
+      };
+    });
+  
+    return combinedQuantities;
   }
 
   async findEntregasFornecedorCie(fornecedor: string){

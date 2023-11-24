@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import '../../listagem/listagem.dart';
 
-Padding fornecedorCard(String nome, String quantidade, String total) {
+Padding fornecedorCard(String fornecedoor, String quantidade, String total, BuildContext context, String item) {
   double progress = int.parse(quantidade) / int.parse(total);
   Color progressBarColor = progress >= 1 ? Colors.green : Colors.red;
   
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+    child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => listagem(name: fornecedoor),
+            ),
+          );
+        },
     child: Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -24,7 +34,7 @@ Padding fornecedorCard(String nome, String quantidade, String total) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              nome.toUpperCase(), // Nome em maiúsculas
+              fornecedoor.toUpperCase(), // Nome em maiúsculas
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18.0,
@@ -33,7 +43,7 @@ Padding fornecedorCard(String nome, String quantidade, String total) {
             ),
             const SizedBox(height: 8.0),
             Text(
-              '$quantidade Tablets',
+              '$quantidade $item',
               style: const TextStyle(
                 color: Colors.black54,
               ),
@@ -57,5 +67,5 @@ Padding fornecedorCard(String nome, String quantidade, String total) {
         ),
       ),
     ),
-  );
+  ));
 }
