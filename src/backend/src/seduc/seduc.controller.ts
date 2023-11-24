@@ -19,39 +19,27 @@ export class SeducController {
   }
 
   @Get('/itens')
-  findOne() {
-    return this.seducService.findFornecedorItem();
+  findItens() {
+    return this.seducService.findItemQuantities();
   }
 
-  @Get('/itens/true')
-  findOneTrue() {
-    return this.seducService.findFornecedorItemTrue();
-  }
 
   @Patch('/entrega/:id')
   update(@Param('id') id: string) {
     return this.seducService.updateEntrega(+id);
   }
 
-  @Get('/escola')
+  @Get('/diretoria')
   findEscola() {
-    return this.seducService.findEscolaItem();
+    return this.seducService.findDiretoriaQuantities();
   }
 
-  @Get('/escola/true')
-  findEscolaTrue() {
-    return this.seducService.findEscolaItemTrue();
-  }
 
   @Get('/fornecedor/escola/:fornecedor')
   findEscolaFornecedor(@Param('fornecedor') fornecedor: string) {
-    return this.seducService.findEntregasFornecedorCie(fornecedor);
+    return this.seducService.findItemFornecedorByName(fornecedor);
   }
 
-  @Get('/fornecedor/escola/true/:fornecedor')
-  findEscolaFornecedorTrue(@Param('fornecedor') fornecedor: string) {
-    return this.seducService.findEntregasFornecedorCieTrue(fornecedor);
-  }
 
   @Get('/cie/diretoria/:diretoria')
   findCieDiretoria(@Param('diretoria') diretoria: string) {

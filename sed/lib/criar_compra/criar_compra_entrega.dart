@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import '../home/components/sedName.dart';
+import '../service/registar_compra.serice.dart';
 
 class CadastroCompra extends StatelessWidget {
-  // Adicione uma variável para rastrear a seleção do item
+  
   String? dropdownItemValue;
+  String? dropdownDiretoriaValue;
+  int? quantidade = 0;
+  String? dropdownFornecedorValue;
+  String cie = "";
+  String prazo = "";
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +101,7 @@ class CadastroCompra extends StatelessWidget {
                     value: dropdownItemValue,
                     onChanged: (String? newValue) {
                       // Atualize a seleção do item
-                      dropdownItemValue = newValue;
+                      dropdownDiretoriaValue = newValue;
                     },
                     items: const <String>[
                       'Norte 1',
@@ -118,6 +126,12 @@ class CadastroCompra extends StatelessWidget {
                   ),
                   SizedBox(height: 23),
                   TextField(
+                    onChanged: (value) {
+                      int? novaQuantidade = int.tryParse(value);
+                      if (novaQuantidade != null){
+                          quantidade = novaQuantidade;
+                      }
+                    },
                     decoration: InputDecoration(
                       labelText: 'Quantidade',
                       contentPadding:
@@ -163,7 +177,7 @@ class CadastroCompra extends StatelessWidget {
                     value: dropdownItemValue,
                     onChanged: (String? newValue) {
                       // Atualize a seleção do item
-                      dropdownItemValue = newValue;
+                      dropdownFornecedorValue = newValue;
                     },
                     items: const <String>[
                       'Rodonaves',
@@ -181,6 +195,9 @@ class CadastroCompra extends StatelessWidget {
                   ),
                   SizedBox(height: 23),
                   TextField(
+                    onChanged: (value) {
+                      cie = value;
+                    },
                     decoration: InputDecoration(
                       labelText: 'CIE da escola',
                       contentPadding:
@@ -231,6 +248,9 @@ class CadastroCompra extends StatelessWidget {
                       height: 23), // Espaço entre os campos de texto e o botão
 
                   TextField(
+                    onChanged: (value){
+                      prazo = value;
+                    },
                     decoration: InputDecoration(
                       labelText: 'Prazo',
                       contentPadding:
