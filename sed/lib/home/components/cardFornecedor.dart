@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-Padding fornecedorCard(String nome, String quantidade, String total) {
+Padding fornecedorCard(
+    String nome, String quantidade, String total, String item) {
   double progress = int.parse(quantidade) / int.parse(total);
   Color progressBarColor = progress >= 1 ? Colors.green : Colors.red;
-  
+
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
     child: Container(
@@ -33,7 +34,7 @@ Padding fornecedorCard(String nome, String quantidade, String total) {
             ),
             const SizedBox(height: 8.0),
             Text(
-              '$quantidade Tablets',
+              '$quantidade $item',
               style: const TextStyle(
                 color: Colors.black54,
               ),
