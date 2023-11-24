@@ -241,7 +241,13 @@ class CadastroEntregaScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      print('Botão Pressionado');
+                      Navigator.of(context).pushReplacementNamed("/home");
+                      ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Compra registrada com sucesso!'),
+                                duration: Duration(seconds: 3),
+                              ),
+                            );
                     },
                     child: Text('Registrar Entrega',
                         style: TextStyle(fontSize: 16)),

@@ -12,8 +12,7 @@ class sedName extends StatelessWidget {
         onSurface: Colors.transparent, // Splash Color
       ),
       onPressed: () {
-        // Adicione sua função de clique aqui
-        print('Botão pressionado');
+        Navigator.of(context).pushReplacementNamed("/home");
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,

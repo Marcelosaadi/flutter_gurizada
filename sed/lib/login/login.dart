@@ -105,8 +105,8 @@ class login_escola extends StatelessWidget {
             ElevatedButton( // Botão Acessar
               onPressed: () {
                     if (email=='adm' && senha=='123'){
-                        //muda para home
-                    }      // Mostra o SnackBar
+                      Navigator.of(context).pushReplacementNamed("/home");
+                    }     
                  
               },
               child: Text('Acessar',

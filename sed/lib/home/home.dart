@@ -38,7 +38,7 @@ class Home extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Escolas',
+                'Diretorias',
                 style: TextStyle(
                   fontSize: 28
                 ),
@@ -48,7 +48,8 @@ class Home extends StatelessWidget {
           escolaCard("Escola 1","50","200"),
           const SizedBox(height: 20),
           ElevatedButton( 
-              onPressed: () {                 
+              onPressed: () {      
+                Navigator.of(context).pushReplacementNamed("/cadastarEntrega");           
               },
               child: Text('Registrar compra',
                   style: TextStyle(
