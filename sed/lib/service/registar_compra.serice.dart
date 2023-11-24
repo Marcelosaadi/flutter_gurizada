@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:http/http.dart' as http;
 
 void main () {
@@ -12,7 +11,7 @@ void main () {
 
 }
 
-const String baseUrl = "http://localhost:3000/seduc";
+const String baseUrl = "http://192.168.15.6:3000/seduc";
 
 Future<void> createCompra(
   String item, String diretoria, int quantidade, String fornecedor, String cie, int prazo) async {
