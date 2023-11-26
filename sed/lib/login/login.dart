@@ -17,10 +17,12 @@ class login_escola extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white, // Fundo branco da tela
       body: Padding(
-        padding:const EdgeInsets.only(left:100,right:100),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+        padding: const EdgeInsets.only(left: 100, right: 100),
+        // Envolve o Column com SingleChildScrollView
+        child: SingleChildScrollView( 
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
             RichText( // Texto 'SED' com cores diferentes
               text: TextSpan(
                 style: TextStyle(fontSize: 60.0),
@@ -104,9 +106,15 @@ class login_escola extends StatelessWidget {
             SizedBox(height: 40),
             ElevatedButton( // Botão Acessar
               onPressed: () {
-                    if (email=='adm' && senha=='123'){
+                    if (email=='adm@seduc.com.br' && senha=='seduc123'){
                       Navigator.of(context).pushReplacementNamed("/home");
-                    }     
+                    } else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Login ou senha errados!'),
+                                duration: Duration(seconds: 2),
+                              ));
+                    };   
                  
               },
               child: Text('Acessar',
@@ -120,12 +128,12 @@ class login_escola extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 60, vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
               ),
             ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
